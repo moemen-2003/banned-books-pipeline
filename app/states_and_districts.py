@@ -2,11 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 import plotly.express as px
-from utils import rank_dataframe
-from utils import get_base_data_url
-
-BASE_DATA_URL = get_base_data_url()
-DATA_URL = os.path.join(BASE_DATA_URL, "banned_books.csv")
+from utils import rank_dataframe, load_data
 
 state_abbreviation_map = {
     "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR", "California": "CA",
@@ -21,11 +17,6 @@ state_abbreviation_map = {
     "Texas": "TX", "Utah": "UT", "Vermont": "VT", "Virginia": "VA", "Washington": "WA",
     "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY"
 }
-
-@st.cache_data
-def load_data(path: str):
-    data = pd.read_csv(path)
-    return data
 
 def by_state_and_district_treemap(data: pd.DataFrame):
     df = data.groupby(["State", "District"])["Title"].nunique().reset_index(name="Titles")
@@ -137,7 +128,9 @@ def district_with_most_banned_books(data: pd.DataFrame):
     top_district = district_counts.sort_values(by="Count", ascending=False).head(1)
     return top_district.iloc[0]["District"], top_district.iloc[0]["Count"]
 
-def display_data(data: pd.DataFrame):
+def display_data():
+    data = load_data()
+    
     st.title("States and Districts (2021-2024)")
     by_state_and_district_treemap(data)
 
@@ -170,4 +163,4 @@ def display_data(data: pd.DataFrame):
 
     by_district_line_chart(data)
 
-display_data(load_data(DATA_URL))
+display_data()

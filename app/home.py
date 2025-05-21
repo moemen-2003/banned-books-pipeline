@@ -1,12 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import os
-from utils import rank_dataframe
-from utils import get_base_data_url
-
-BASE_DATA_URL = get_base_data_url()
-DATA_URL = os.path.join(BASE_DATA_URL, "banned_books.csv")
+from utils import rank_dataframe, load_data
 
 ban_colors = {
     "banned": "#bf0603",
@@ -14,11 +9,6 @@ ban_colors = {
     "banned by restriction": "#0096c7",
     "banned pending investigation": "#ffea00"
 }
-
-@st.cache_data
-def load_data(path: str):
-    data = pd.read_csv(path)
-    return data
 
 def by_year_bar_chart(data: pd.DataFrame):
     year_status_counts = (
@@ -86,7 +76,9 @@ def top_5_challenged_authors(data: pd.DataFrame):
     top_authors = author_counts.sort_values(by="Count", ascending=False).head(5)
     return top_authors[["Author", "Count"]]
 
-def display_data(data: pd.DataFrame):
+def display_data():
+    data = load_data()
+
     st.title("Overview of Banned Books in the US (2021-2024)")
 
     st.info('Data is pulled from https://pen.org/', icon="ℹ️")
@@ -138,7 +130,4 @@ def display_data(data: pd.DataFrame):
       ranked_challenged_authors = rank_dataframe(top_challenged_authors, rank_column_name="Rank")
       st.dataframe(ranked_challenged_authors.set_index("Rank"))
 
-display_data(load_data(DATA_URL))
-
-
-
+display_data()
