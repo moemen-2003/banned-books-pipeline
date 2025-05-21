@@ -66,8 +66,6 @@ https://banned-books-us.streamlit.app/
 
 1. In the terminal, run these commands
    ```bash
-   cd VincentLeV
-   
    ./start.sh
    ```
 
@@ -94,14 +92,12 @@ Log into the DB with the password you provide in this prompt `Enter postgres pas
 
 In the terminal, run these commands
 ```bash
-cd VincentLeV
-
 docker compose up -d
 ```
 
 ## Stop the app
 
-In the terminal, run this script when you are inside `VincentLeV` folder
+In the terminal, run this script
 ```bash
 
 ./stop.sh
