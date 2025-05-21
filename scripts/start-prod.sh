@@ -1,0 +1,1 @@
+docker-compose -p banned-books-pipeline-prod --env-file .env.prod -f docker-compose.prod.yaml up -d

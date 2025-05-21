@@ -2,4 +2,5 @@
 __pycache__
 logs
 .env
+.env.prod
 servers.json
