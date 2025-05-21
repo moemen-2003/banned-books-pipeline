@@ -18,10 +18,9 @@ This project was the capstone project I've done in DataTribe Collective's Capsto
 1. Scrape banned books data using Python
 2. Clean data using Pandas
 3. Extract data to CSV
-4. Save data to PostgreSQL
+4. Save data to Neon DB
 5. Visualize data in Streamlit
 
-Step 4 is redundant in this project since I load the using the CSV files but I want to include this so that the project will be scalable later.
 
 ![Diagram](./assets/banned-books-pipeline-diagram.jpg)
 
