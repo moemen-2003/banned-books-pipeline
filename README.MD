@@ -6,9 +6,10 @@ This project was the capstone project I've done in DataTribe Collective's Capsto
 
 - Python (3.12)
 - Pandas
-- PostgreSQL
 - Airflow (3.0.0+)
 - Streamlit
+- PostgreSQL
+- Neon
 
 ---
 
@@ -22,7 +23,7 @@ This project was the capstone project I've done in DataTribe Collective's Capsto
 
 Step 4 is redundant in this project since I load the using the CSV files but I want to include this so that the project will be scalable later.
 
-![Diagram](./banned-books-pipeline-diagram.jpg)
+![Diagram](./assets/banned-books-pipeline-diagram.jpg)
 
 ---
 
@@ -57,7 +58,7 @@ VincentLeV/
 Streamlit app is deployed here
 
 ```
-https://vincent-banned-books.streamlit.app/
+https://banned-books-us.streamlit.app/
 ```
 
 ## Setup and Run Locally
