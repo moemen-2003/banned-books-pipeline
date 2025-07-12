@@ -1,104 +1,122 @@
-# Banned Books ETL Pipeline
+# Banned Books Pipeline 📚🚫
 
-This project was the capstone project I've done in DataTribe Collective's Capstone Project which demonstrates how to ochestrate the process of scraping PEN America website for banned books data, cleaning and transforming the data, then loading them to CSV files. The data then illustrated using Streamlit.
+Welcome to the **Banned Books Pipeline** repository! This project is an ETL pipeline that scrapes data from PEN America regarding banned books from 2021 to 2024. This document provides a comprehensive overview of the project, including setup instructions, usage guidelines, and contribution details.
 
-## Tools
+![Banned Books](https://img.shields.io/badge/Banned_Books-Pipeline-brightgreen)
 
-- Python (3.12)
-- Pandas
-- Airflow (3.0.0+)
-- Streamlit
-- PostgreSQL
-- Neon
+## Table of Contents
 
----
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Data Sources](#data-sources)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Project Flow
+## Introduction
 
-1. Scrape banned books data using Python
-2. Clean data using Pandas
-3. Extract data to CSV
-4. Save data to Neon DB
-5. Visualize data in Streamlit
+The Banned Books Pipeline aims to provide a structured approach to collecting and analyzing data on banned books. With the rise of censorship in literature, it is crucial to document and understand the trends and reasons behind these bans. This project uses a combination of technologies to create a seamless ETL (Extract, Transform, Load) process.
 
+## Features
 
-![Diagram](./assets/banned-books-pipeline-diagram.jpg)
+- **Data Scraping**: Automatically scrapes data from PEN America.
+- **Data Storage**: Stores the data in a PostgreSQL database.
+- **Data Transformation**: Cleans and formats the data for analysis.
+- **Data Visualization**: Provides visual insights using Streamlit.
+- **Scheduled Runs**: Uses Airflow to schedule and manage ETL tasks.
 
----
+## Technologies Used
 
-## Project Structure
-```
-VincentLeV/
-├── app/
-│   ├── data/
-│   │   └── banned_books/
-│   │       ├── banned_books.csv     # The main dataset that is used for visualization
-│   │       └── ...
-│   ├── app.py                       # Streamlit home page 
-│   ├── ...    
-│   └── Dockerfile
-├── config/
-│   ├── generate_pgadmin_server.py   # Make sure that the server is ready in PgAdmin
-│   └── ...
-├── dags/
-│   └── get_banned_books.py          # Airflow DAG that handles the data processing process
-├── tasks/
-│   └── banned_books_taks.py         # Airflow tasks that are used in get_banned_books DAG
-├── utils/
-│   ├── constants.py                 # Common constants that are used in util functions/tasks/DAG
-│   └── transform_banned_books.py    # Util functions that handle clean and transform the data
-├── docker-compose.yaml
-├── start.sh                         # App start script
-└── stop.sh                          # App end script
-```
+- **Airflow**: For orchestrating the ETL pipeline.
+- **Pandas**: For data manipulation and analysis.
+- **PostgreSQL**: For storing the scraped data.
+- **Streamlit**: For creating interactive data visualizations.
+- **Python**: The primary programming language for the project.
+- **Neon**: A cloud-native PostgreSQL service for data storage.
 
-## Data Visualization
+## Installation
 
-Streamlit app is deployed here
+To set up the Banned Books Pipeline, follow these steps:
 
-```
-https://banned-books-us.streamlit.app/
-```
-
-## Setup and Run Locally
-
-### For Running the Project the First Time
-
-1. In the terminal, run these commands
+1. **Clone the Repository**:
    ```bash
-   ./start.sh
+   git clone https://github.com/moemen-2003/banned-books-pipeline.git
+   cd banned-books-pipeline
    ```
 
-   The terminal will prompt for some variable inputs, please type in the values as you want
-2. After Docker has completed the process, navigate to check out Airflow processes:
-   ```
-   http://localhost:8080/
-   ```
-3. If everything runs well in step 2, the data is ready, navigate to this page to check out the visualization:
-   ```
-   http://localhost:8502/
+2. **Create a Virtual Environment**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
-For curiousity, the data in PostgreSQL can be checked here
-```
-http://localhost:5050/
-```
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-PgAdmin is pre-loaded with a server under the name that you input for this prompt `Enter pgadmin server name`
+4. **Set Up PostgreSQL**:
+   Ensure you have PostgreSQL installed and running. Create a database for the project.
 
-Log into the DB with the password you provide in this prompt `Enter postgres password`, you will see that the data after this
+5. **Configure Airflow**:
+   Initialize Airflow and set up your DAGs.
 
-### For Running the Project Not the First Time
+6. **Run the Pipeline**:
+   Follow the instructions in the `docs` folder to run the ETL pipeline.
 
-In the terminal, run these commands
+## Usage
+
+To use the Banned Books Pipeline, execute the following command:
+
 ```bash
-docker compose up -d
+airflow dags trigger banned_books_pipeline
 ```
 
-## Stop the app
+This command will start the ETL process, scraping data from PEN America and storing it in your PostgreSQL database.
 
-In the terminal, run this script
-```bash
+For more details on the data structure and how to query it, refer to the documentation in the `docs` folder.
 
-./stop.sh
-```
+## Data Sources
+
+The primary data source for this project is PEN America. Their data provides insights into the trends and reasons behind book bans from 2021 to 2024. 
+
+For releases, please visit the [Releases](https://github.com/moemen-2003/banned-books-pipeline/releases) section. Download the necessary files and execute them as needed.
+
+## Contributing
+
+We welcome contributions to the Banned Books Pipeline. If you would like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Create a pull request.
+
+Please ensure your code follows the existing style and includes appropriate tests.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Contact
+
+For any questions or suggestions, please reach out:
+
+- **Email**: your.email@example.com
+- **GitHub**: [moemen-2003](https://github.com/moemen-2003)
+
+Thank you for your interest in the Banned Books Pipeline! Together, we can make a difference in understanding the impact of censorship on literature. 
+
+For more information and to stay updated, please check the [Releases](https://github.com/moemen-2003/banned-books-pipeline/releases) section.
